@@ -19,6 +19,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
                 { 
                     test: /\.css$/,
                     use: ['style-loader','css-loader']
+                },{
+                    test: /\.(woff|woff2|eot|ttf|otf)$/,
+                    exclude: /node_modules/,
+                    loader: 'url-loader',
+                    options:{
+                        publicPath: './src/fonts',
+                        name: './src/fonts/[name].[ext]',
+                        limit: 1000
+                    }
                 }
             ]
         },

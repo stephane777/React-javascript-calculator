@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './Calculator'
-import './style.css'
-import Calculator from './Calculator';
+
+import './style/style.css'
+import Calculator from './js/Calculator';
 
 class App extends React.Component {
     render(){
