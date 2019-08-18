@@ -9,10 +9,13 @@ class Calculator extends React.Component{
         super(props)
         this.state = {
             display:'27',
-            formula:'21+2+4'
+            formula:'21+2+4',
+            isDigit: true,
         }
         this.handleClickButton = this.handleClickButton.bind(this)
         this.resetDisplay = this.resetDisplay.bind(this)
+        this.digits =['0','1','2','3','4','5','6','7','8','9']
+        this.operand =['/','X','-','+']
     }
     componentDidMount(){
         // const buttons = document.querySelector('.buttons')
@@ -28,7 +31,9 @@ class Calculator extends React.Component{
     }
     handleClickButton(e){
         const buttonClicked = e.target.innerText;
+
         buttonClicked ==='AC' ? this.resetDisplay() : ''
+       
     }
     render(){
     

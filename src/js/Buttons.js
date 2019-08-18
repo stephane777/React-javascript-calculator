@@ -6,7 +6,7 @@ const Buttons = (props)=>{
     return (
       <div className='buttons'>
            {props.labels.map((label,i)=>(
-            <Button 
+            <Button
                 key={label.label}
                 value={label.label}
                 id={label.id}
@@ -14,7 +14,6 @@ const Buttons = (props)=>{
             />
         ))}
       </div>
-        
     )
 }
 
