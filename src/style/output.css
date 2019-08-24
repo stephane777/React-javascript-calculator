@@ -7,13 +7,13 @@
     font-family: 'digital-7';
     color: rgb(211, 31, 31);
   }
-  #display, #history {
+  #display, #formula {
     text-align: right;
   }
   #display {
     font-size: 30px;
   }
-#history {
+#formula {
   font-size: 24px;
   height: 28px;
   padding-top: 7px;
