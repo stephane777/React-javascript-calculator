@@ -9,13 +9,16 @@ class Calculator extends React.Component {
           super(props);
           this.state = {
                display: '0',
-               formula: '',
+               formula: '0',
                rotateDegree: 0
           };
           this.handleClickButton = this.handleClickButton.bind(this);
           this.rotateReactIcon = this.rotateReactIcon.bind(this);
           this.resetDisplay = this.resetDisplay.bind(this);
           this.rotateReactIconOnButtonClicked = this.rotateReactIconOnButtonClicked.bind(
+               this
+          );
+          this.checkNumberOfDigitTyped = this.checkNumberOfDigitTyped.bind(
                this
           );
           this.digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
@@ -28,17 +31,14 @@ class Calculator extends React.Component {
           // })
      }
      resetDisplay() {
-          console.log('reset display!');
           this.rotateReactIcon(0);
           this.setState({
                display: '0',
-               formula: '',
+               formula: '0',
                rotateDegree: 0
           });
      }
      rotateReactIcon(degree) {
-          // const rotateDegree = this.state.rotateDegree;
-          console.log('rotateReactIcon!');
           const icon = document.getElementById('react_icon');
           icon.style = `transform:rotate(${degree}deg)`;
           icon.style.transitionDuration = '.5s';
@@ -51,6 +51,23 @@ class Calculator extends React.Component {
           }));
      }
 
+     checkNumberOfDigitTyped() {
+          const digit = this.state.display.length;
+          if (digit > 20) {
+               const limitEntered = this.state.display;
+               this.setState({
+                    display: 'digit limit met'
+               });
+               setTimeout(() => {
+                    this.setState({
+                         display: limitEntered
+                    });
+               }, 1000);
+               return true;
+          }
+          return false;
+     }
+
      handleClickButton(e) {
           let buttonClicked = e.target.innerText;
           const isDigitClicked = this.digits.includes(buttonClicked);
@@ -59,7 +76,12 @@ class Calculator extends React.Component {
           const isDisplayAnOperand = this.operand.includes(this.state.display);
           const isDecimal = this.state.display.includes('.');
 
-          // console.log(`button clicked! :${buttonClicked}`);
+          if (isDigitClicked) {
+               if (this.checkNumberOfDigitTyped()) {
+                    return;
+               }
+          }
+
           if (buttonClicked === 'AC') {
                this.resetDisplay();
                return;
@@ -69,12 +91,7 @@ class Calculator extends React.Component {
                this.rotateReactIconOnButtonClicked();
           }
 
-          // console.log(`typeof buttonClicked: ${typeof buttonClicked}`)
           if (isDisplayANumber && isDigitClicked) {
-               // console.log(
-               //      `isDisplayANumber:${isDisplayANumber} isDigitalClicked:${isDigitClicked}`
-               // );
-
                if (!isDecimal || (isDecimal && buttonClicked != '.')) {
                     this.setState(state => {
                          return state.display === '0' && buttonClicked === '.'
@@ -94,13 +111,12 @@ class Calculator extends React.Component {
                                 };
                     });
                }
-
-               //  concat the new digit in display : "234" + "5" => "2345"
           }
 
           if (isDisplayANumber && isOperatorClicked) {
                buttonClicked = buttonClicked === 'x' ? '*' : buttonClicked;
                const isComputed = this.state.formula.includes('=');
+               console.log('toto');
                if (isComputed) {
                     this.setState(state => ({
                          display: buttonClicked,
@@ -130,17 +146,10 @@ class Calculator extends React.Component {
           if (buttonClicked === '=') {
                const regexp = new RegExp(/\+|\-|\*|\//g);
                const regexp2 = new RegExp(/[-+*/]?-?\d+(\.\d+)?/g);
-               // console.log(this.state.formula.split(regexp));
-               // console.log(this.state.formula.match(regexp2));
-               // "34+-*54-/*34"
                const cleanedFormula = this.state.formula.match(regexp2)
                     ? this.state.formula.match(regexp2).join('')
                     : this.state.formula;
                const isCleaned = cleanedFormula != this.state.formula;
-
-               // console.log(isCleaned);
-               // console.log(`cleanedFormula: ${cleanedFormula}`);
-               // console.log(`this.state.formula: ${this.state.formula}`);
 
                if (regexp.test(this.state.formula)) {
                     this.setState(state => ({
@@ -154,8 +163,6 @@ class Calculator extends React.Component {
                                    ? String(eval(cleanedFormula))
                                    : String(eval(state.formula)))
                     }));
-               } else {
-                    // console.log("doesn't match anything!");
                }
           }
      }

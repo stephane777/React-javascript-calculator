@@ -32,20 +32,41 @@ body {
      flex-wrap: wrap;
      /* border: 1px solid black; */
      width: 320px;
-     height: 450px;
+     height: 500px;
 }
-#main-container:after {
+/* #main-container:after {
      content: 'Created by Stephane Candelas';
      font-size: 12px;
      font-family: Verdana, Geneva, Tahoma, sans-serif;
-     /* color: rgb(171, 207, 241); */
+
      color: cyan;
      padding-top: 10px;
      margin: 0 auto;
-}
+} */
 #react_icon {
      font-size: 80px;
      margin: 0 auto;
      /* padding-bottom: 5px; */
      color: cyan;
+}
+
+#footer {
+     text-align: center;
+     width: 100%;
+     font-family: Verdana, Geneva, Tahoma, sans-serif;
+     font-size: 12px;
+     color: cyan;
+     padding-top: 10px;
+     /* margin: 0 auto; */
+}
+#github_icon {
+     width: 34px;
+     height: 34px;
+}
+#footer a {
+     text-decoration: none;
+     color: cyan;
+}
+#footer a:hover {
+     color: #fff;
 }
