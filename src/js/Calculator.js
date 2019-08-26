@@ -41,6 +41,7 @@ class Calculator extends React.Component {
           console.log('rotateReactIcon!');
           const icon = document.getElementById('react_icon');
           icon.style = `transform:rotate(${degree}deg)`;
+          icon.style.transitionDuration = '.5s';
      }
 
      rotateReactIconOnButtonClicked() {
@@ -62,6 +63,8 @@ class Calculator extends React.Component {
           if (buttonClicked === 'AC') {
                this.resetDisplay();
                return;
+          } else if (buttonClicked === '=') {
+               this.rotateReactIcon(0);
           } else {
                this.rotateReactIconOnButtonClicked();
           }
