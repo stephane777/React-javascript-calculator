@@ -9,10 +9,15 @@ class Calculator extends React.Component {
           super(props);
           this.state = {
                display: '0',
-               formula: ''
+               formula: '',
+               rotateDegree: 0
           };
           this.handleClickButton = this.handleClickButton.bind(this);
+          this.rotateReactIcon = this.rotateReactIcon.bind(this);
           this.resetDisplay = this.resetDisplay.bind(this);
+          this.rotateReactIconOnButtonClicked = this.rotateReactIconOnButtonClicked.bind(
+               this
+          );
           this.digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
           this.operand = ['/', 'x', '-', '+', '*'];
      }
@@ -23,11 +28,28 @@ class Calculator extends React.Component {
           // })
      }
      resetDisplay() {
+          console.log('reset display!');
+          this.rotateReactIcon(0);
           this.setState({
                display: '0',
-               formula: ''
+               formula: '',
+               rotateDegree: 0
           });
      }
+     rotateReactIcon(degree) {
+          // const rotateDegree = this.state.rotateDegree;
+          console.log('rotateReactIcon!');
+          const icon = document.getElementById('react_icon');
+          icon.style = `transform:rotate(${degree}deg)`;
+     }
+
+     rotateReactIconOnButtonClicked() {
+          this.rotateReactIcon(this.state.rotateDegree + 15);
+          this.setState(state => ({
+               rotateDegree: state.rotateDegree + 15
+          }));
+     }
+
      handleClickButton(e) {
           let buttonClicked = e.target.innerText;
           const isDigitClicked = this.digits.includes(buttonClicked);
@@ -36,16 +58,19 @@ class Calculator extends React.Component {
           const isDisplayAnOperand = this.operand.includes(this.state.display);
           const isDecimal = this.state.display.includes('.');
 
+          // console.log(`button clicked! :${buttonClicked}`);
           if (buttonClicked === 'AC') {
                this.resetDisplay();
                return;
+          } else {
+               this.rotateReactIconOnButtonClicked();
           }
 
           // console.log(`typeof buttonClicked: ${typeof buttonClicked}`)
           if (isDisplayANumber && isDigitClicked) {
-               console.log(
-                    `isDisplayANumber:${isDisplayANumber} isDigitalClicked:${isDigitClicked}`
-               );
+               // console.log(
+               //      `isDisplayANumber:${isDisplayANumber} isDigitalClicked:${isDigitClicked}`
+               // );
 
                if (!isDecimal || (isDecimal && buttonClicked != '.')) {
                     this.setState(state => {
@@ -103,16 +128,16 @@ class Calculator extends React.Component {
                const regexp = new RegExp(/\+|\-|\*|\//g);
                const regexp2 = new RegExp(/[-+*/]?-?\d+(\.\d+)?/g);
                // console.log(this.state.formula.split(regexp));
-               console.log(this.state.formula.match(regexp2));
+               // console.log(this.state.formula.match(regexp2));
                // "34+-*54-/*34"
                const cleanedFormula = this.state.formula.match(regexp2)
                     ? this.state.formula.match(regexp2).join('')
                     : this.state.formula;
                const isCleaned = cleanedFormula != this.state.formula;
 
-               console.log(isCleaned);
-               console.log(`cleanedFormula: ${cleanedFormula}`);
-               console.log(`this.state.formula: ${this.state.formula}`);
+               // console.log(isCleaned);
+               // console.log(`cleanedFormula: ${cleanedFormula}`);
+               // console.log(`this.state.formula: ${this.state.formula}`);
 
                if (regexp.test(this.state.formula)) {
                     this.setState(state => ({
@@ -127,7 +152,7 @@ class Calculator extends React.Component {
                                    : String(eval(state.formula)))
                     }));
                } else {
-                    console.log("doesn't match anything!");
+                    // console.log("doesn't match anything!");
                }
           }
      }
