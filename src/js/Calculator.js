@@ -131,6 +131,9 @@ class Calculator extends React.Component {
           }
           if (isDisplayAnOperand) {
                buttonClicked = buttonClicked === 'x' ? '*' : buttonClicked;
+               const regex = new RegExp(/0\/$/);
+               if (regex.test(this.state.formula) && buttonClicked === '0')
+                    return;
                this.setState(state => {
                     return buttonClicked === '.'
                          ? {
@@ -146,9 +149,12 @@ class Calculator extends React.Component {
           if (buttonClicked === '=') {
                const regexp = new RegExp(/\+|\-|\*|\//g);
                const regexp2 = new RegExp(/[-+*/]?-?\d+(\.\d+)?/g);
+
                const cleanedFormula = this.state.formula.match(regexp2)
                     ? this.state.formula.match(regexp2).join('')
                     : this.state.formula;
+               console.log(cleanedFormula);
+
                const isCleaned = cleanedFormula != this.state.formula;
 
                if (regexp.test(this.state.formula)) {
