@@ -158,7 +158,7 @@ class Calculator extends React.Component {
                     ? (cleanedFormula = cleanedFormula.replace('--', '+'))
                     : cleanedFormula;
                const isCleaned = cleanedFormula != this.state.formula;
-
+               // pressing = multiple times should add the latest entry to the result of formula
                if (regexp.test(this.state.formula)) {
                     this.setState(state => ({
                          display: isCleaned
