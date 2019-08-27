@@ -149,12 +149,14 @@ class Calculator extends React.Component {
           if (buttonClicked === '=') {
                const regexp = new RegExp(/\+|\-|\*|\//g);
                const regexp2 = new RegExp(/[-+*/]?-?\d+(\.\d+)?/g);
-
-               const cleanedFormula = this.state.formula.match(regexp2)
+               // remove extra operator
+               let cleanedFormula = this.state.formula.match(regexp2)
                     ? this.state.formula.match(regexp2).join('')
                     : this.state.formula;
-               console.log(cleanedFormula);
-
+               // replace -- with +
+               /--/.test(cleanedFormula)
+                    ? (cleanedFormula = cleanedFormula.replace('--', '+'))
+                    : cleanedFormula;
                const isCleaned = cleanedFormula != this.state.formula;
 
                if (regexp.test(this.state.formula)) {
