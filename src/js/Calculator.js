@@ -149,6 +149,7 @@ class Calculator extends React.Component {
           if (buttonClicked === '=') {
                const regexp = new RegExp(/\+|\-|\*|\//g);
                const regexp2 = new RegExp(/[-+*/]?-?\d+(\.\d+)?/g);
+               const regex3 = new RegExp(/=/);
                // remove extra operator
                let cleanedFormula = this.state.formula.match(regexp2)
                     ? this.state.formula.match(regexp2).join('')
@@ -159,18 +160,47 @@ class Calculator extends React.Component {
                     : cleanedFormula;
                const isCleaned = cleanedFormula != this.state.formula;
                // pressing = multiple times should add the latest entry to the result of formula
+               const isComputed = regex3.test(this.state.formula);
+               const splittedFormula = isComputed
+                    ? this.state.formula.split('=')
+                    : null;
+               console.log(`isComputed: ${isComputed}`);
                if (regexp.test(this.state.formula)) {
-                    this.setState(state => ({
-                         display: isCleaned
-                              ? String(eval(cleanedFormula))
-                              : String(eval(state.formula)),
-                         formula:
-                              cleanedFormula +
-                              buttonClicked +
-                              (isCleaned
-                                   ? String(eval(cleanedFormula))
-                                   : String(eval(state.formula)))
-                    }));
+                    this.setState(state => {
+                         return isComputed
+                              ? {
+                                     display: String(
+                                          eval(
+                                               splittedFormula[0] +
+                                                    '+' +
+                                                    splittedFormula[1]
+                                          )
+                                     ),
+                                     formula:
+                                          splittedFormula[0] +
+                                          '+' +
+                                          splittedFormula[1] +
+                                          buttonClicked +
+                                          String(
+                                               eval(
+                                                    splittedFormula[0] +
+                                                         '+' +
+                                                         splittedFormula[1]
+                                               )
+                                          )
+                                }
+                              : {
+                                     display: isCleaned
+                                          ? String(eval(cleanedFormula))
+                                          : String(eval(state.formula)),
+                                     formula:
+                                          cleanedFormula +
+                                          buttonClicked +
+                                          (isCleaned
+                                               ? String(eval(cleanedFormula))
+                                               : String(eval(state.formula)))
+                                };
+                    });
                }
           }
      }
