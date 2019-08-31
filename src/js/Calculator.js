@@ -74,13 +74,15 @@ class Calculator extends React.Component {
     const isDisplayAnOperand = this.operand.includes(this.state.display);
     const isDecimal = this.state.display.includes(".");
     const isInfinity = this.state.display.toLowerCase() === "infinity";
+    const regex3 = new RegExp(/=/);
+    const isComputed = regex3.test(this.state.formula);
 
     if (isDigitClicked) {
       if (this.checkNumberOfDigitTyped()) {
         return;
       }
     }
-    if (isInfinity && isDigitClicked) {
+    if ((isInfinity && isDigitClicked) || (isComputed && isDigitClicked)) {
       this.setState({
         display: "",
         formula: ""
@@ -152,7 +154,7 @@ class Calculator extends React.Component {
     if (buttonClicked === "=") {
       const regexp = new RegExp(/\+|\-|\*|\//g);
       const regexp2 = new RegExp(/[-+*/]?-?\d+(\.\d+)?/g);
-      const regex3 = new RegExp(/=/);
+
       const regex4 = new RegExp(/[-+/*][-+]?\d+(\.\d+)?$/);
       // remove extra operator
       let cleanedFormula = this.state.formula.match(regexp2)
@@ -164,7 +166,7 @@ class Calculator extends React.Component {
         : cleanedFormula;
       const isCleaned = cleanedFormula != this.state.formula;
       // pressing = multiple times should add the latest entry to the result of formula
-      const isComputed = regex3.test(this.state.formula);
+
       let valueToAdd, newFormula;
       if (isComputed) {
         newFormula = this.state.formula.split("=")[0];
