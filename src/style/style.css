@@ -1,38 +1,42 @@
 @font-face {
-     font-family: 'digital-7 Regular';
-     src: url('../fonts/digital-7.ttf');
+  font-family: "digital-7 Regular";
+  src: url("../fonts/digital-7.ttf");
 }
 
 html,
 body,
 #app {
-     margin: 0;
-     height: 100%;
-     width: 100%;
+  margin: 0;
+  height: 100%;
+  width: 100%;
 }
 button {
-     margin: 0;
-     padding: 0;
+  margin: 0;
+  padding: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  /* appearance: none; */
+  outline: none;
 }
 body {
-     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-          Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-     background-color: rgb(3, 93, 122);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: rgb(3, 93, 122);
 }
 
 #root {
-     display: flex;
-     height: 100%;
+  display: flex;
+  height: 100%;
 }
 #main-container {
-     display: flex;
-     align-self: center;
-     margin: 0 auto;
-     /* background-color: #aaa; */
-     flex-wrap: wrap;
-     /* border: 1px solid black; */
-     width: 320px;
-     height: 500px;
+  display: flex;
+  align-self: center;
+  margin: 0 auto;
+  /* background-color: #aaa; */
+  flex-wrap: wrap;
+  /* border: 1px solid black; */
+  width: 320px;
+  height: 500px;
 }
 /* #main-container:after {
      content: 'Created by Stephane Candelas';
@@ -44,29 +48,29 @@ body {
      margin: 0 auto;
 } */
 #react_icon {
-     font-size: 80px;
-     margin: 0 auto;
-     /* padding-bottom: 5px; */
-     color: cyan;
+  font-size: 80px;
+  margin: 0 auto;
+  /* padding-bottom: 5px; */
+  color: cyan;
 }
 
 #footer {
-     text-align: center;
-     width: 100%;
-     font-family: Verdana, Geneva, Tahoma, sans-serif;
-     font-size: 12px;
-     color: cyan;
-     padding-top: 10px;
-     /* margin: 0 auto; */
+  text-align: center;
+  width: 100%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 12px;
+  color: cyan;
+  padding-top: 10px;
+  /* margin: 0 auto; */
 }
 #github_icon {
-     width: 34px;
-     height: 34px;
+  width: 34px;
+  height: 34px;
 }
 #footer a {
-     text-decoration: none;
-     color: cyan;
+  text-decoration: none;
+  color: cyan;
 }
 #footer a:hover {
-     color: #fff;
+  color: #fff;
 }
