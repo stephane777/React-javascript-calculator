@@ -1,22 +1,22 @@
 #output {
-     width: 100%;
-     min-height: 60px;
-     padding: 0 10px;
-     background-color: #000;
-     font-family: 'digital-7';
-     color: rgb(211, 31, 31);
+  width: 100%;
+  min-height: 60px;
+  padding: 0 10px;
+  background-color: #000;
+  font-family: "digital-7", sans-serif;
+  color: rgb(211, 31, 31);
 }
 #display,
 #formula {
-     text-align: right;
+  text-align: right;
 }
 #display {
-     font-size: 30px;
+  font-size: 30px;
 }
 #formula {
-     font-size: 24px;
-     min-height: 28px;
-     padding-top: 7px;
-     color: rgb(49, 134, 15);
-     overflow: hidden;
+  font-size: 24px;
+  min-height: 28px;
+  padding-top: 7px;
+  color: rgb(49, 134, 15);
+  overflow: hidden;
 }
